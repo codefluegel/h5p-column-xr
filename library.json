@@ -1,6 +1,6 @@
 {
-  "machineName": "H5P.Column",
-  "title": "Column",
+  "machineName": "H5P.ColumnXR",
+  "title": "Column (XR)",
   "description": "Content holder displaying content in a column.",
   "contentType": "instructional",
   "license": "MIT",
@@ -19,12 +19,12 @@
   },
   "preloadedJs": [
     {
-      "path": "scripts/h5p-column.js"
+      "path": "scripts/h5p-column-xr.js"
     }
   ],
   "preloadedCss": [
     {
-      "path": "styles/h5p-column.css"
+      "path": "styles/h5p-column-xr.css"
     }
   ]
 }

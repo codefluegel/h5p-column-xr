@@ -1,5 +1,5 @@
-H5P Column
-==========
+H5P Column (XR)
+===============
 
 Display a list of content in a column format, each one below the next one.
 

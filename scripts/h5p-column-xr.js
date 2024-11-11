@@ -1,4 +1,4 @@
-H5P.Column = (function (EventDispatcher) {
+H5P.ColumnXR = (function (EventDispatcher) {
 
   /**
    * Column Constructor
@@ -8,8 +8,8 @@ H5P.Column = (function (EventDispatcher) {
    * @param {number} id Content identifier
    * @param {Object} data User specific data to adapt behavior
    */
-  function Column(params, id, data) {
-    /** @alias H5P.Column# */
+  function ColumnXR(params, id, data) {
+    /** @alias H5P.ColumnXR# */
     var self = this;
 
     // We support events by extending this class
@@ -129,7 +129,7 @@ H5P.Column = (function (EventDispatcher) {
       bubbleUp(instance, 'resize', self);
 
       // Check if instance is a task
-      if (Column.isTask(instance)) {
+      if (ColumnXR.isTask(instance)) {
         // Tasks requires completion
 
         instance.on('xAPI', trackScoring(numTasks));
@@ -442,7 +442,7 @@ H5P.Column = (function (EventDispatcher) {
      * @return {string} Title.
      */
     self.getTitle = function () {
-      return H5P.createTitle((self.contentData && self.contentData.metadata && self.contentData.metadata.title) ? self.contentData.metadata.title : 'Column');
+      return H5P.createTitle((self.contentData && self.contentData.metadata && self.contentData.metadata.title) ? self.contentData.metadata.title : 'ColumnXR');
     };
 
     /**
@@ -503,8 +503,8 @@ H5P.Column = (function (EventDispatcher) {
     self.setActivityStarted();
   }
 
-  Column.prototype = Object.create(EventDispatcher.prototype);
-  Column.prototype.constructor = Column;
+  ColumnXR.prototype = Object.create(EventDispatcher.prototype);
+  ColumnXR.prototype.constructor = ColumnXR;
 
   /**
    * Makes it easy to bubble events from parent to children
@@ -548,47 +548,22 @@ H5P.Column = (function (EventDispatcher) {
   }
 
   /**
-   * Definition of which content types are tasks
-   */
-  var isTasks = [
-    'H5P.ImageHotspotQuestion',
-    'H5P.Blanks',
-    'H5P.Essay',
-    'H5P.SingleChoiceSet',
-    'H5P.MultiChoice',
-    'H5P.TrueFalse',
-    'H5P.DragQuestion',
-    'H5P.Summary',
-    'H5P.DragText',
-    'H5P.MarkTheWords',
-    'H5P.MemoryGame',
-    'H5P.QuestionSet',
-    'H5P.InteractiveVideo',
-    'H5P.CoursePresentation',
-    'H5P.DocumentationTool',
-    'H5P.MultiMediaChoice'
-  ];
-
-  /**
    * Check if the given content instance is a task (will give a score)
    *
    * @param {Object} instance
    * @return {boolean}
    */
-  Column.isTask = function (instance) {
-    if (instance.isTask !== undefined) {
-      return instance.isTask; // Content will determine self if it's a task
+  ColumnXR.isTask = function (instance) {
+    if (!instance) {
+      return false;
     }
 
-    // Go through the valid task names
-    for (var i = 0; i < isTasks.length; i++) {
-      // Check against library info. (instanceof is broken in H5P.newRunnable)
-      if (instance.libraryInfo.machineName === isTasks[i]) {
-        return true;
-      }
+    if (typeof instance.isTask === 'boolean') {
+      return instance.isTask; // Content will determine if it's task on its own
     }
 
-    return false;
+    // Check for maxScore as indicator for being a task
+    return typeof instance.getMaxScore === 'function';
   }
 
   /**
@@ -657,5 +632,5 @@ H5P.Column = (function (EventDispatcher) {
     }
   }
 
-  return Column;
+  return ColumnXR;
 })(H5P.EventDispatcher);
