@@ -43,7 +43,6 @@
             "H5P.ModelViewer 1.7",
             "H5P.MultiChoice 1.16",
             "H5P.MultiMediaChoice 0.3",
-            "H5P.ProfileConfigurator 1.3",
             "H5P.Questionnaire 1.3",
             "H5P.QuestionSet 1.20",
             "H5P.Row 1.0",
@@ -54,7 +53,6 @@
             "H5P.Timeline 1.1",
             "H5P.TrueFalse 1.8",
             "H5P.Video 1.6",
-            "H5P.VirtualTourXR 0.5",
             "H5P.Virtual3DTour 1.0"
           ]
         },
